@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
