@@ -52,4 +52,4 @@
         </div>
     </div>
 </x-app-layout>
-@vite('resources/js/companies/edit.js')
+@vite('resources/js/companies/create.js')
