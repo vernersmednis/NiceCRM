@@ -19,7 +19,28 @@
                             </div>
                             <!-- Table to display the list of companies -->
                             <div class="col-span-1 border p-8">
-                                {{ __('This page is yet to be implemented') }}
+                                <table class="min-w-max w-full bg-white border border-gray-300">
+                                    <thead>
+                                        <tr>
+                                            <!-- Table headers -->
+                                            <th class="px-4 py-2 border">{{ __('Logo') }}</th>
+                                            <th class="px-4 py-2 border">{{ __('Name') }}</th>
+                                            <th class="px-4 py-2 border">{{ __('Email') }}</th>
+                                            <th class="px-4 py-2 border"></th> <!-- Empty header for action buttons -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="px-4 py-2 border"><input class="w-full" type="text" value="{{ $company->logo }}"/></td> <!-- Display company logo -->
+                                            <td class="px-4 py-2 border"><input class="w-full" type="text" value="{{ $company->name }}"/></td> <!-- Display company name -->
+                                            <td class="px-4 py-2 border"><input class="w-full" type="text" value="{{ $company->email }}"/></td> <!-- Display company email -->
+                                            <!-- "Save" button -->
+                                            <td class="px-4 py-2 border">
+                                                <button class="bg-white border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">{{ __('Save') }}</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
