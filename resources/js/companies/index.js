@@ -15,7 +15,6 @@ $(function() {
                 success: function(response) {
                     // Remove the row from the table
                     row.remove();
-                    alert(response.success);
                 },
                 error: function(response) {
                     // Display error if failed
