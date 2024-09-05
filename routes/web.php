@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/companies/{company}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

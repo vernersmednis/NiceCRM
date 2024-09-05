@@ -17,4 +17,24 @@ class CompanyController extends Controller
     {
         return view('companies.edit', ['company' => $company]);
     }
+
+    public function update(Company $company)
+    {
+        // Validating input
+        request()->validate([
+            'logo' => ['required','min:3'],
+            'name' => ['required', 'min:3'], 
+            'email' => ['required', 'email'], 
+        ]);
+
+        // Update company attributes directly
+        $company->update([
+            'logo' => request('logo'),
+            'name' => request('name'),
+            'email' => request('email'),
+        ]);
+
+        // Redirect to companies list after successful update
+        return redirect('/companies');
+    }
 }
