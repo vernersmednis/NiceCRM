@@ -12,4 +12,9 @@ class CompanyController extends Controller
         $companies = Company::all(); // Fetch all companies from the database
         return view('companies.index', compact('companies'));
     }
+
+    public function edit(Company $company)
+    {
+        return view('companies.edit', ['company' => $company]);
+    }
 }
