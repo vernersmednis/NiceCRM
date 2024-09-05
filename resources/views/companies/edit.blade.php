@@ -17,7 +17,7 @@
                             <div class="col-span-1 border px-8 py-4 text-xl">
                                 {{ __('Company Settings') }}
                             </div>
-                            <!-- Table to display the list of companies -->
+                            <!-- Table to display the company settings -->
                             <div class="col-span-1 border p-8">
                                 <form method="POST" action="/companies/{{$company->id}}">
                                     @csrf
