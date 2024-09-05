@@ -13,7 +13,7 @@ Route::get('/companies', [CompanyController::class, 'index'])->name('companies.i
 Route::get('/companies/{company}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
 Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update');
 Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
-
+Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
