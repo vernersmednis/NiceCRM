@@ -75,7 +75,16 @@ class CompanyController extends Controller
         // Redirect to companies list after successful creation
         return redirect('/companies');
     }
-    
+    public function destroy($id)
+    {
+        // Delete the company from the database (if it exists)
+        $company = Company::findOrFail($id);
+        $company->delete();
+
+        // Return a JSON response
+        return response()->json(['success' => 'Company deleted successfully']);
+    }
+
 
     public function create()
     {

@@ -14,6 +14,7 @@ Route::get('/companies/{company}/edit', [CompanyController::class, 'edit'])->nam
 Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update');
 Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
 Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
+Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

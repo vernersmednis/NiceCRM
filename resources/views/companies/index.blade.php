@@ -36,7 +36,7 @@
                                     <tbody>
                                         <!-- Loop through the companies and display each one -->
                                         @foreach($companies as $company)
-                                            <tr>
+                                            <tr id="company-row-{{ $company->id }}" data-id="{{ $company->id }}" data-token="{{ csrf_token() }}">
                                                 <td class="px-4 py-2 border">
                                                     <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
                                                 </td> <!-- Display company logo -->
@@ -59,3 +59,4 @@
         </div>
     </div>
 </x-app-layout>
+@vite('resources/js/companies/index.js')
