@@ -45,4 +45,9 @@ class CompanyController extends Controller
         // Redirect to companies list after successful update
         return redirect('/companies');
     }
+
+    public function create()
+    {
+        return view('companies.create');
+    }
 }
