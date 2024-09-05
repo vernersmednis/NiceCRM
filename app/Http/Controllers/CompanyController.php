@@ -21,19 +21,27 @@ class CompanyController extends Controller
     public function update(Company $company)
     {
         // Validating input
-        request()->validate([
-            'logo' => ['required','min:3'],
+        $validatedData = request()->validate([
+            'logo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg', 'max:2048'],
             'name' => ['required', 'string', 'max:255', 'unique:companies,name,'.$company->id], 
-            'email' => ['required', 'email', 'unique:companies,email,'.$company->id ], 
+            'email' => ['required', 'email', 'unique:companies,email,'.$company->id], 
         ]);
-
-        // Update company attributes directly
+    
+        // Determine the logo path
+        $logoPath = request()->hasFile('logo')
+            ? request()->file('logo')->store('public/logos')
+            : $company->logo;
+    
+        // If storing in public directory, you may need to strip the 'public/' part
+        $logoPath = str_replace('public/', '', $logoPath);
+    
+        // Update company attributes
         $company->update([
-            'logo' => request('logo'),
-            'name' => request('name'),
-            'email' => request('email'),
+            'logo' => $logoPath,
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
         ]);
-
+    
         // Redirect to companies list after successful update
         return redirect('/companies');
     }

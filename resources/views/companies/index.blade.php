@@ -37,7 +37,9 @@
                                         <!-- Loop through the companies and display each one -->
                                         @foreach($companies as $company)
                                             <tr>
-                                                <td class="px-4 py-2 border">{{ $company->logo }}</td> <!-- Display company logo -->
+                                                <td class="px-4 py-2 border">
+                                                    <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
+                                                </td> <!-- Display company logo -->
                                                 <td class="px-4 py-2 border">{{ $company->name }}</td> <!-- Display company name -->
                                                 <td class="px-4 py-2 border">{{ $company->email }}</td> <!-- Display company email -->
                                                 <!-- "Edit" and "Delete" buttons -->
