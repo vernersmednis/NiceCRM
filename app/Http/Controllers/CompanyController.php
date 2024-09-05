@@ -23,8 +23,8 @@ class CompanyController extends Controller
         // Validating input
         request()->validate([
             'logo' => ['required','min:3'],
-            'name' => ['required', 'min:3'], 
-            'email' => ['required', 'email'], 
+            'name' => ['required', 'string', 'max:255', 'unique:companies,name,'.$company->id], 
+            'email' => ['required', 'email', 'unique:companies,email,'.$company->id ], 
         ]);
 
         // Update company attributes directly
