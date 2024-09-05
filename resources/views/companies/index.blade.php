@@ -51,6 +51,8 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <!-- Pagination links -->
+                                {{ $companies->links() }}
                             </div>
                         </div>
                     </div>

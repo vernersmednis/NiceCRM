@@ -9,9 +9,10 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::all(); // Fetch all companies from the database
+        $companies = Company::paginate(10); // Fetch 10 companies per page
         return view('companies.index', compact('companies'));
     }
+    
 
     public function edit(Company $company)
     {
