@@ -46,6 +46,37 @@ class CompanyController extends Controller
         return redirect('/companies');
     }
 
+    public function store()
+    {
+        // Validating input
+        $validatedData = request()->validate([
+            'logo' => ['required', 'image', 'mimes:png,jpg,jpeg,svg', 'max:2048'],
+            'name' => ['required', 'string', 'max:255', 'unique:companies,name'], 
+            'email' => ['required', 'email', 'unique:companies,email'], 
+        ]);
+    
+        // Determine the logo path
+        $logoPath = request()->hasFile('logo')
+            ? request()->file('logo')->store('public/logos')
+            : null;
+    
+        // If storing in public directory, you may need to strip the 'public/' part
+        if ($logoPath) {
+            $logoPath = str_replace('public/', '', $logoPath);
+        }
+    
+        // Create a new company
+        Company::create([
+            'logo' => $logoPath,
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+        ]);
+    
+        // Redirect to companies list after successful creation
+        return redirect('/companies');
+    }
+    
+
     public function create()
     {
         return view('companies.create');
