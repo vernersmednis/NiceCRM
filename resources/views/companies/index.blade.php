@@ -23,7 +23,32 @@
                             </div>
                             <!-- Table to display the list of companies -->
                             <div class="col-span-1 border p-8">
-                                <x-content-table data-ajax="{{ route('api.companies') }}" />
+                                <table id="companies-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="{{ route('api.companies') }}">
+                                    <thead>
+                                        <tr>
+                                            <th>Logo</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <!-- Company logo -->
+                                            <td class="px-4 py-2 border flex gap-4">
+                                                <img id="logoImage" src="" alt="Company Logo" class="w-10 h-10 object-cover">
+                                                <input id="logoInput" class="w-full" type="file" name="logo"/>
+                                            </td> 
+                                            <!-- Company name -->
+                                            <td class="px-4 py-2 border"></td> 
+                                            <!-- Company email -->
+                                            <td class="px-4 py-2 border"></td> 
+                                            <!-- "Edit" and "Delete" buttons -->
+                                            <td class="px-4 py-2 border">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
