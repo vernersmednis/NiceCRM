@@ -45,10 +45,14 @@
                             <!-- Table title -->
                             <div class="col-span-1 border px-8 py-4 text-xl">
                                 {{ __('Employees List') }}
+                                <!-- Button to create a new employee -->
+                                <button class="bg-green-500 text-white font-bold py-2 px-4 my-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
+                                    {{ __('Create New Employee') }}
+                                </button>
                             </div>
                             <!-- Table to display the list of employees -->
                             <div class="col-span-1 border p-8">
-                                <table id="employees-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="{{ route('api.companies') }}">
+                                <table id="employees-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="{{ route('api.employees') }}">
                                     <thead>
                                         <tr>
                                             <th>First name</th>
@@ -60,11 +64,13 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <!-- Employee first logo -->
+                                            <!-- Employee first name -->
                                             <td class="px-4 py-2 border"></td> 
                                             <!-- Employee last name -->
                                             <td class="px-4 py-2 border"></td> 
                                             <!-- Employee email -->
+                                            <td class="px-4 py-2 border"></td> 
+                                            <!-- Employee phone -->
                                             <td class="px-4 py-2 border"></td> 
                                             <!-- "Edit" and "Delete" buttons -->
                                             <td class="px-4 py-2 border">
