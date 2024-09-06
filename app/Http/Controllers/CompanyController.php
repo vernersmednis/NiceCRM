@@ -42,6 +42,11 @@ class CompanyController extends Controller
         }
     }
 
+    public function show(Company $company)
+    {
+        return view('companies.show', ['company' => $company]);
+    }
+
     public function index()
     {
         return view('companies.index');
