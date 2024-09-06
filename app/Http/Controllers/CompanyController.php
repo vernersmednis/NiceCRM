@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class CompanyController extends Controller
 {
@@ -21,10 +22,29 @@ class CompanyController extends Controller
         return $currentLogo;
     }
 
+    public function getCompanies(Request $request)
+    {
+        try {
+            // Select the necessary columns from the companies table
+            $companies = Company::select(['id', 'name', 'email', 'logo']);
+    
+            // Return the data in the required DataTables format
+            return DataTables::of($companies)
+                ->addIndexColumn() // Add an index column (optional)
+                ->toJson(); // Ensure the response is JSON
+    
+        } catch (\Exception $e) {
+            // Log error to help with debugging
+            \Log::error('DataTables Error: ' . $e->getMessage());
+    
+            // Return error response (optional)
+            return response()->json(['error' => 'An error occurred while fetching the data'], 500);
+        }
+    }
+
     public function index()
     {
-        $companies = Company::all(); // Fetch all companies from the database
-        return view('companies.index', compact('companies'));
+        return view('companies.index');
     }
 
     public function edit(Company $company)
