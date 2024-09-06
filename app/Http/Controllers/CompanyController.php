@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+    protected function handleLogoUpload($request, $currentLogo = null)
+    {
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('public/logos');
+            return str_replace('public/', '', $logoPath); // Clean up the path if needed
+        }
+
+        // If no new logo is uploaded, return the current logo
+        return $currentLogo;
+    }
+
     public function index()
     {
         $companies = Company::all(); // Fetch all companies from the database
@@ -18,22 +32,13 @@ class CompanyController extends Controller
         return view('companies.edit', ['company' => $company]);
     }
 
-    public function update(Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
-        // Validating input
-        $validatedData = request()->validate([
-            'logo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg', 'max:2048'],
-            'name' => ['required', 'string', 'max:255', 'unique:companies,name,'.$company->id], 
-            'email' => ['required', 'email', 'unique:companies,email,'.$company->id], 
-        ]);
+        // Get validated data from the request
+        $validatedData = $request->validated();
     
         // Determine the logo path
-        $logoPath = request()->hasFile('logo')
-            ? request()->file('logo')->store('public/logos')
-            : $company->logo;
-    
-        // If storing in public directory, you may need to strip the 'public/' part
-        $logoPath = str_replace('public/', '', $logoPath);
+        $logoPath = $this->handleLogoUpload($request, $company->logo);
     
         // Update company attributes
         $company->update([
@@ -43,28 +48,17 @@ class CompanyController extends Controller
         ]);
     
         // Redirect to companies list after successful update
-        return redirect('/companies');
+        return redirect()->route('companies.index')->with('success', 'Company updated successfully');
     }
 
-    public function store()
+    public function store(StoreCompanyRequest $request)
     {
-        // Validating input
-        $validatedData = request()->validate([
-            'logo' => ['required', 'image', 'mimes:png,jpg,jpeg,svg', 'max:2048'],
-            'name' => ['required', 'string', 'max:255', 'unique:companies,name'], 
-            'email' => ['required', 'email', 'unique:companies,email'], 
-        ]);
+        // Validate the input (already done automatically via Form Request)
+        $validatedData = $request->validated();
     
-        // Determine the logo path
-        $logoPath = request()->hasFile('logo')
-            ? request()->file('logo')->store('public/logos')
-            : null;
-    
-        // If storing in public directory, you may need to strip the 'public/' part
-        if ($logoPath) {
-            $logoPath = str_replace('public/', '', $logoPath);
-        }
-    
+        // Handle the logo upload
+        $logoPath = $this->handleLogoUpload($request);
+
         // Create a new company
         Company::create([
             'logo' => $logoPath,
