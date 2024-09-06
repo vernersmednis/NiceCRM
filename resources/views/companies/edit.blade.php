@@ -17,13 +17,36 @@
                             <div class="col-span-1 border px-8 py-4 text-xl">
                                 {{ __('Company Settings') }}
                             </div>
+                            <!-- Table to display the company settings -->
                             <div class="col-span-1 border p-8">
-                                <!-- 'Edit company' form -->
                                 <form method="POST" action="/companies/{{$company->id}}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
-                                    <!-- Table to display the company settings -->
-                                    <x-content-table :company="$company"/>
+                                    <table class="min-w-max w-full bg-white border border-gray-300">
+                                        <thead>
+                                            <tr>
+                                                <!-- Table headers -->
+                                                <th class="px-4 py-2 border">{{ __('Logo') }}</th>
+                                                <th class="px-4 py-2 border">{{ __('Name') }}</th>
+                                                <th class="px-4 py-2 border">{{ __('Email') }}</th>
+                                                <th class="px-4 py-2 border"></th> <!-- Empty header for action buttons -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="px-4 py-2 border flex gap-4">
+                                                    <img id="logoImage" src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
+                                                    <input id="logoInput" class="w-full" type="file" name="logo"/>
+                                                </td> <!-- Company logo -->
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="name" value="{{ $company->name }}"/></td> <!-- Company name -->
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="email" value="{{ $company->email }}"/></td> <!-- Company email -->
+                                                <!-- "Save" button -->
+                                                <td class="px-4 py-2 border">
+                                                    <button type="submit" class="bg-white border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">{{ __('Save') }}</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     <!-- Error messages -->
                                     <div class="text-red-500">
                                         @error('logo'){{ $message }}<br>@enderror
