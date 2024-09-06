@@ -1,4 +1,5 @@
 $(function() {
+    
     // Get the CSRF token for secure 'DELETE' requests
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
