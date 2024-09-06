@@ -23,34 +23,7 @@
                             </div>
                             <!-- Table to display the list of companies -->
                             <div class="col-span-1 border p-8">
-                                <table class="min-w-max w-full bg-white border border-gray-300">
-                                    <thead>
-                                        <tr>
-                                            <!-- Table headers -->
-                                            <th class="px-4 py-2 border">{{ __('Logo') }}</th>
-                                            <th class="px-4 py-2 border">{{ __('Name') }}</th>
-                                            <th class="px-4 py-2 border">{{ __('Email') }}</th>
-                                            <th class="px-4 py-2 border"></th> <!-- Empty header for action buttons -->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Loop through the companies and display each one -->
-                                        @foreach($companies as $company)
-                                            <tr id="company-row-{{ $company->id }}" data-id="{{ $company->id }}" data-token="{{ csrf_token() }}">
-                                                <td class="px-4 py-2 border">
-                                                    <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
-                                                </td> <!-- Display company logo -->
-                                                <td class="px-4 py-2 border">{{ $company->name }}</td> <!-- Display company name -->
-                                                <td class="px-4 py-2 border">{{ $company->email }}</td> <!-- Display company email -->
-                                                <!-- "Edit" and "Delete" buttons -->
-                                                <td class="px-4 py-2 border">
-                                                    <button class="bg-white border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">{{ __('Edit') }}</button>
-                                                    <button class="delete-btn bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">{{ __('Delete') }}</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                <x-content-table data-ajax="{{ route('api.companies') }}" />
                             </div>
                         </div>
                     </div>
