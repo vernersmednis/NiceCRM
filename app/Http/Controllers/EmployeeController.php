@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -29,4 +31,50 @@ class EmployeeController extends Controller
             return response()->json(['error' => 'An error occurred while fetching the data'], 500);
         }
     }
+    
+    public function edit(Employee $employee)
+    {
+        return view('employees.edit', ['employee' => $employee]);
+    }
+
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    {
+        // Get validated data from the request
+        $validatedData = $request->validated();
+    
+        // Update employee attributes
+        $employee->update([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+        ]);
+    
+        // Redirect to employees list of the company after successful update
+        return redirect('/companies/'.$employee->company_id);
+    }
+
+    public function store(StoreEmployeeRequest $request)
+    {
+        // Validate the input (already done automatically via Form Request)
+        $validatedData = $request->validated();
+
+        // Create a new employee
+        Employee::create([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'company_id' => $validatedData['company_id'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+        ]);
+    
+        // Redirect to employees list of the company after successful creation
+        return redirect('/companies/'.$validatedData['company_id']);
+    }
+    public function create(Request $request)
+    {
+        $company_id = $request->query('company_id');
+        return view('employees.create', compact('company_id'));
+    }
+
 }

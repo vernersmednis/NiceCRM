@@ -51,9 +51,11 @@
                             <div class="col-span-1 border px-8 py-4 text-xl">
                                 {{ __('Employees List') }}
                                 <!-- Button to create a new employee -->
-                                <button class="bg-green-500 text-white font-bold py-2 px-4 my-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
-                                    {{ __('Create New Employee') }}
-                                </button>
+                                <a href="{{ route('employees.create', ['company_id' => $company->id]) }}">
+                                    <button class="bg-green-500 text-white font-bold py-2 px-4 my-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
+                                        {{ __('Create New Employee') }}
+                                    </button>
+                                </a>
                             </div>
                             <!-- Table to display the list of employees -->
                             <div class="col-span-1 border p-8">
