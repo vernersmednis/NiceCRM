@@ -25,6 +25,7 @@
                                             <th>Logo</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,6 +38,10 @@
                                             <td class="px-4 py-2 border">{{ $company->name }}</td> 
                                             <!-- Company email -->
                                             <td class="px-4 py-2 border">"{{ $company->email }}</td>
+                                            <!-- "Edit" button -->
+                                            <td class="px-4 py-2 border">
+                                                <button class="bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">__('Edit')</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -52,7 +57,7 @@
                             </div>
                             <!-- Table to display the list of employees -->
                             <div class="col-span-1 border p-8">
-                                <table id="employees-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="{{ route('api.employees') }}">
+                                <table id="employees-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="{{ route('api.companies.employees', ['company' => $company->id]) }}">
                                     <thead>
                                         <tr>
                                             <th>First name</th>
