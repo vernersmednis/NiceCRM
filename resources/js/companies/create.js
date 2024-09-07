@@ -17,9 +17,11 @@ $(function() {
 
     
     // Functionality to display the selected company logo when "Choose File" is clicked
+    // Cleaner display of the logo "file input"
     $(document).on('change', '#logoInput', function(event) {
         const file = event.target.files[0]; // Get the selected file
         if (file) {
+            $('#customLogoInput span').text(file.name);
             const reader = new FileReader();
             reader.onload = function(e) {
                 $('#logoImage').attr('src', e.target.result); // Update logo image with the selected file
@@ -27,4 +29,5 @@ $(function() {
             reader.readAsDataURL(file); // Convert file to data URL for image display
         }
     });
+
 });
