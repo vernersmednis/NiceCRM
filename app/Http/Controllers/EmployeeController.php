@@ -10,6 +10,8 @@ use Yajra\DataTables\DataTables;
 
 class EmployeeController extends Controller
 {
+    // This function actually loads employees in batches per datatable.net page
+    // (because, as you can see in resources/js/companies/show.js, the datatables config includes "serverSide: true")
     public function getEmployees($company)
     {
         try {
