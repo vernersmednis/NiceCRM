@@ -20,6 +20,11 @@ Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->na
 Route::get('/api/companies', [CompanyController::class, 'getCompanies'])->name('api.companies');
 Route::get('/api/companies/{company}/employees', [EmployeeController::class, 'getEmployees'])->name('api.companies.employees');
 
+Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+Route::patch('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
