@@ -22,6 +22,8 @@ class CompanyController extends Controller
         return $currentLogo;
     }
 
+    // This function actually loads companies in batches per datatable.net page
+    // (because, as you can see in resources/js/companies/index.js, the datatables config includes "serverSide: true")
     public function getCompanies(Request $request)
     {
         try {

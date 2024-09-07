@@ -31,7 +31,7 @@
                                     <tbody>
                                         <tr>
                                             <!-- Company logo -->
-                                            <td class="px-4 py-2 border flex gap-4">
+                                            <td class="px-4 py-2 border ">
                                                 <img id="logoImage" src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
                                             </td> 
                                             <!-- Company name -->
@@ -81,12 +81,11 @@
                                             <td class="px-4 py-2 border"></td> 
                                             <!-- "Edit" and "Delete" buttons -->
                                             <td class="px-4 py-2 border">
+                                                <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">__('Delete')</button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
                             </div>
                         </div>
                     </div>
@@ -95,4 +94,4 @@
         </div>
     </div>
 </x-app-layout>
-@vite('resources/js/companies/show.js')
+@vite(['resources/css/companies/show.css', 'resources/js/companies/show.js'])

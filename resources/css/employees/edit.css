@@ -1,0 +1,32 @@
+/* File input for the company logo */
+#customLogoInput {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    max-width: 175px; /* Set max-width */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis */
+    text-align: center; /* Center text */
+    line-height: 24px; /* Adjust line height to center text vertically */
+}
+#customLogoInput > input {
+     display: none; 
+}
+
+/* Data table styling */
+table.dataTable tr td:first-child, table.dataTable th td:first-child {
+    min-width: 220px !important; 
+    max-width: 220px !important;
+}
+table.dataTable td:not(:last-child) {
+    min-width: 220px !important;
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before {
+    border-left: 10px solid rgb(255, 0, 0);
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr.dtr-expanded>td.dtr-control:before {
+    border-top: 10px solid rgb(255, 0, 0);
+}

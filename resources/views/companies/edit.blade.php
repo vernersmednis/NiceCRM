@@ -35,9 +35,14 @@
                                         <tbody>
                                             <tr>
                                                 <!-- Company logo -->
-                                                <td class="px-4 py-2 border flex gap-4">
-                                                    <img id="logoImage" src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
-                                                    <input id="logoInput" class="w-full" type="file" name="logo"/>
+                                                <td class="px-4 py-2 border">
+                                                    <div class=" flex gap-4">
+                                                        <img id="logoImage" src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
+                                                        <label id="customLogoInput">
+                                                            <input id="logoInput" type="file" name="logo">
+                                                            <span >Choose file</span>
+                                                        </label>
+                                                    </div>
                                                 </td> 
                                                 <!-- Company name -->
                                                 <td class="px-4 py-2 border"><input class="w-full" type="text" name="name" value="{{ $company->name }}"/></td> 
@@ -65,4 +70,4 @@
         </div>
     </div>
 </x-app-layout>
-@vite('resources/js/companies/edit.js')
+@vite(['resources/css/companies/edit.css', 'resources/js/companies/edit.js'])

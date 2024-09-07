@@ -48,23 +48,20 @@ $(function() {
     $(document).on('click', '.delete-btn', function () {
         const id = $(this).data('id'); // Get the ID of the selected company
 
-        if (confirm('Are you sure you want to delete this record?')) {
-            // Send AJAX request to delete the record
-            $.ajax({
-                url: `/companies/${id}`, // URL to delete the specific company
-                type: 'DELETE', // HTTP method for deletion
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken, // Send CSRF token for security
-                },
-                success: function () {
-                    $('#companies-table').DataTable().ajax.reload(); // Reload the table data after successful deletion
-                    alert('Record deleted successfully.');
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error deleting record:', error);
-                    alert('Failed to delete record.');
-                }
-            });
-        }
+        // Send AJAX request to delete the record
+        $.ajax({
+            url: `/companies/${id}`, // URL to delete the specific company
+            type: 'DELETE', // HTTP method for deletion
+            headers: {
+                'X-CSRF-TOKEN': csrfToken, // Send CSRF token for security
+            },
+            success: function () {
+                $('#companies-table').DataTable().ajax.reload(); // Reload the table data after successful deletion
+            },
+            error: function (xhr, status, error) {
+                console.error('Error deleting record:', error);
+                alert('Failed to delete record.');
+            }
+        });
     });
 });

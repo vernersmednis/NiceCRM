@@ -10,13 +10,14 @@ use Yajra\DataTables\DataTables;
 
 class EmployeeController extends Controller
 {
+    // This function actually loads employees in batches per datatable.net page
+    // (because, as you can see in resources/js/companies/show.js, the datatables config includes "serverSide: true")
     public function getEmployees($company)
     {
         try {
             // Retrieve employees by company_id from the route parameter
             $employees = Employee::select(['first_name', 'last_name', 'company_id', 'email', 'phone'])
-                ->where('company_id', $company)  // $company comes from the route parameter
-                ->get();
+                ->where('company_id', $company);  // $company comes from the route parameter
     
             // Return the data formatted for DataTables
             return DataTables::of($employees)
