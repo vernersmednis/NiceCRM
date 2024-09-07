@@ -2,7 +2,7 @@ $(function() {
     
     // Get the CSRF token for secure 'DELETE' requests
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+    
     // Initialize DataTable for the company details
     $('#companies-table').DataTable({
         pageLength: 1, 

@@ -8,23 +8,24 @@ use Yajra\DataTables\DataTables;
 
 class EmployeeController extends Controller
 {
-
-    public function getEmployees(Request $request)
+    public function getEmployees($company)
     {
         try {
-            // Select the necessary columns from the employees table
-            $companies = Employee::select(['first_name', 'last_name', 'company_id', 'email', 'phone']);
+            // Retrieve employees by company_id from the route parameter
+            $employees = Employee::select(['first_name', 'last_name', 'company_id', 'email', 'phone'])
+                ->where('company_id', $company)  // $company comes from the route parameter
+                ->get();
     
-            // Return the data in the required DataTables format
-            return DataTables::of($companies)
-                ->addIndexColumn() // Add an index column (optional)
-                ->toJson(); // Ensure the response is JSON
+            // Return the data formatted for DataTables
+            return DataTables::of($employees)
+                ->addIndexColumn() // Optional: Adds an index column in DataTables
+                ->toJson(); // Return as JSON for DataTables
     
         } catch (\Exception $e) {
-            // Log error to help with debugging
+            // Log the error for debugging
             \Log::error('DataTables Error: ' . $e->getMessage());
     
-            // Return error response (optional)
+            // Return an error response in JSON format
             return response()->json(['error' => 'An error occurred while fetching the data'], 500);
         }
     }

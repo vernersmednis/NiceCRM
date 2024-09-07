@@ -18,7 +18,7 @@ Route::get('/companies/create', [CompanyController::class, 'create'])->name('com
 Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
 Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
 Route::get('/api/companies', [CompanyController::class, 'getCompanies'])->name('api.companies');
-Route::get('/api/employees', [EmployeeController::class, 'getEmployees'])->name('api.employees');
+Route::get('/api/companies/{company}/employees', [EmployeeController::class, 'getEmployees'])->name('api.companies.employees');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
