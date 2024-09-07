@@ -45,6 +45,7 @@
                                             <td class="px-4 py-2 border"></td> 
                                             <!-- "Edit" and "Delete" buttons -->
                                             <td class="px-4 py-2 border">
+                                                <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">__('Delete')</button>
                                             </td>
                                         </tr>
                                     </tbody>
