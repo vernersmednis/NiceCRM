@@ -11,10 +11,9 @@ $(function() {
             info: "" // Remove "Showing 1 to 1 of 1 entry" text
         },
         columnDefs: [
-            { orderable: false, targets: '_all' } // Disable sorting for all columns
+            { orderable: false, targets: '_all' }, // Disable sorting for all columns
         ]
     });
-
     
     // Functionality to display the selected company logo when "Choose File" is clicked
     // Cleaner display of the logo "file input"

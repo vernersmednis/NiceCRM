@@ -8,10 +8,10 @@ $(function() {
         responsive: true, 
         paging: false,
         language: {
-            info: "" 
+            info: "" // Remove "Showing 1 to 1 of 1 entry" text
         },
         columnDefs: [
-            { orderable: false, targets: '_all' } 
+            { orderable: false, targets: '_all' } // Disable sorting for all columns
         ]
     });
 

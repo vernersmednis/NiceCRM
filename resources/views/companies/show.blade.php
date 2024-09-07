@@ -31,7 +31,7 @@
                                     <tbody>
                                         <tr>
                                             <!-- Company logo -->
-                                            <td class="px-4 py-2 border flex gap-4">
+                                            <td class="px-4 py-2 border ">
                                                 <img id="logoImage" src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
                                             </td> 
                                             <!-- Company name -->
@@ -94,4 +94,4 @@
         </div>
     </div>
 </x-app-layout>
-@vite('resources/js/companies/show.js')
+@vite(['resources/css/companies/show.css', 'resources/js/companies/show.js'])

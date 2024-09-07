@@ -1,0 +1,14 @@
+/* Data table styling */
+table.dataTable tr td:first-child, table.dataTable th td:first-child {
+    min-width: 220px !important; 
+    max-width: 220px !important;
+}
+table.dataTable td:not(:last-child) {
+    min-width: 220px !important;
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before {
+    border-left: 10px solid rgb(255, 0, 0);
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr.dtr-expanded>td.dtr-control:before {
+    border-top: 10px solid rgb(255, 0, 0);
+}

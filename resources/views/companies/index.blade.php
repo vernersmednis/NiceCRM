@@ -58,4 +58,4 @@
         </div>
     </div>
 </x-app-layout>
-@vite('resources/js/companies/index.js')
+@vite(['resources/css/companies/index.css', 'resources/js/companies/index.js'])

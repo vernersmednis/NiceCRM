@@ -66,4 +66,4 @@
         </div>
     </div>
 </x-app-layout>
-@vite('resources/js/employees/edit.js')
+@vite(['resources/css/employees/edit.css', 'resources/js/employees/edit.js'])
