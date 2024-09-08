@@ -63,13 +63,13 @@ $(function() {
 
         // Send AJAX request to delete the record
         $.ajax({
-            url: `/employee/${id}`, // URL to delete the specific employee
+            url: `/employees/${id}`, // URL to delete the specific employee
             type: 'DELETE', // HTTP method for deletion
             headers: {
                 'X-CSRF-TOKEN': csrfToken, // Send CSRF token for security
             },
             success: function () {
-                $('#employee-table').DataTable().ajax.reload(); // Reload the table data after successful deletion
+                $('#employees-table').DataTable().ajax.reload(); // Reload the table data after successful deletion
             },
             error: function (xhr, status, error) {
                 console.error('Error deleting record:', error);
