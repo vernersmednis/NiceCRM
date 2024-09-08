@@ -52,7 +52,7 @@ class EmployeeController extends Controller
         ]);
     
         // Redirect to employees list of the company after successful update
-        return redirect('/companies/'.$employee->company_id);
+        return redirect()->route('companies.show', ['company' => $employee->company_id]);
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -70,7 +70,7 @@ class EmployeeController extends Controller
         ]);
     
         // Redirect to employees list of the company after successful creation
-        return redirect('/companies/'.$validatedData['company_id']);
+        return redirect()->route('companies.show', ['company' => $validatedData['company_id']]);
     }
     public function create(Request $request)
     {
