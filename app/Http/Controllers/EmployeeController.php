@@ -16,7 +16,7 @@ class EmployeeController extends Controller
     {
         try {
             // Retrieve employees by company_id from the route parameter
-            $employees = Employee::select(['first_name', 'last_name', 'company_id', 'email', 'phone'])
+            $employees = Employee::select(['id', 'first_name', 'last_name', 'company_id', 'email', 'phone'])
                 ->where('company_id', $company);  // $company comes from the route parameter
     
             // Return the data formatted for DataTables

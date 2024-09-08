@@ -21,6 +21,7 @@ $(function() {
     // Initialize DataTable with server-side processing
     var originalTableTemplateContent = $('#employees-table');
     var actions = originalTableTemplateContent.find('.actions');
+    var urlTemplate = actions.find('a').attr('data-url');
     $('#employees-table').removeClass('hidden').DataTable({
         processing: true, // Show a processing indicator when the table is loading
         serverSide: true, // Enable server-side processing to fetch data from the server
@@ -40,6 +41,8 @@ $(function() {
                 data: null,
                 render: function (data) {
                     // Render Edit and Delete buttons for each row
+                    var companyUrl = urlTemplate.replace(':employee', data.id);
+                    actions.find('a').attr('href', companyUrl);
                     actions.find('.delete-btn').attr('data-id', data.id);
                     return actions.html();
                 }
