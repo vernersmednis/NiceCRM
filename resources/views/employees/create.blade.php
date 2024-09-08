@@ -26,11 +26,11 @@
                                     <table id="employees-table" class="display" data-storage="{{ asset('storage/') }}">
                                         <thead>
                                             <tr>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Action</th>
+                                                <th>{{ __('First Name') }}</th>
+                                                <th>{{ __('Last Name') }}</th>
+                                                <th>{{ __('Email') }}</th>
+                                                <th>{{ __('Phone') }}</th>
+                                                <th>{{ __('Action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

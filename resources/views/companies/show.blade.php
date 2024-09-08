@@ -19,13 +19,13 @@
                             </div>
                             <div class="col-span-1 border p-8">
                                 <!-- Table to display the company information -->
-                                <table id="companies-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="">
+                                <table id="companies-table" class="hidden" data-storage="{{ asset('storage/') }}" data-ajax="">
                                     <thead>
                                         <tr>
-                                            <th>Logo</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Action</th>
+                                            <th>{{ __('Logo') }}</th>
+                                            <th>{{ __('Name') }}</th>
+                                            <th>{{ __('Email') }}</th>
+                                            <th>{{ __('Action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -35,12 +35,18 @@
                                                 <img id="logoImage" src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
                                             </td> 
                                             <!-- Company name -->
-                                            <td class="px-4 py-2 border">{{ $company->name }}</td> 
+                                            <td class="px-4 py-2 border">
+                                                {{ $company->name }}
+                                            </td> 
                                             <!-- Company email -->
-                                            <td class="px-4 py-2 border">"{{ $company->email }}</td>
+                                            <td class="px-4 py-2 border">
+                                                {{ $company->email }}
+                                            </td>
                                             <!-- "Edit" button -->
                                             <td class="px-4 py-2 border">
-                                                <button class="bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">__('Edit')</button>
+                                                <button class="bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                                    {{ __('Edit') }}
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -59,29 +65,42 @@
                             </div>
                             <!-- Table to display the list of employees -->
                             <div class="col-span-1 border p-8">
-                                <table id="employees-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="{{ route('api.companies.employees', ['company' => $company->id]) }}">
+                                <table id="employees-table" class="hidden" data-storage="{{ asset('storage/') }}" data-ajax="{{ route('api.companies.employees', ['company' => $company->id]) }}">
                                     <thead>
                                         <tr>
-                                            <th>First name</th>
-                                            <th>Last Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Action</th>
+                                            <th>{{ __('First name') }}</th>
+                                            <th>{{ __('Last Name') }}</th>
+                                            <th>{{ __('Email') }}</th>
+                                            <th>{{ __('Phone') }}</th>
+                                            <th>{{ __('Action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <!-- Employee first name -->
-                                            <td class="px-4 py-2 border"></td> 
-                                            <!-- Employee last name -->
-                                            <td class="px-4 py-2 border"></td> 
-                                            <!-- Employee email -->
-                                            <td class="px-4 py-2 border"></td> 
-                                            <!-- Employee phone -->
-                                            <td class="px-4 py-2 border"></td> 
-                                            <!-- "Edit" and "Delete" buttons -->
                                             <td class="px-4 py-2 border">
-                                                <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">__('Delete')</button>
+                                                {{ __('Example first name') }}
+                                            </td> 
+                                            <!-- Employee last name -->
+                                            <td class="px-4 py-2 border">
+                                                {{ __('Example last name') }}
+                                            </td> 
+                                            <!-- Employee email -->
+                                            <td class="px-4 py-2 border">
+                                                {{ __('Example email') }}
+                                            </td> 
+                                            <!-- Employee phone -->
+                                            <td class="px-4 py-2 border">
+                                                {{ __('Example phone') }}
+                                            </td> 
+                                            <!-- "Edit" and "Delete" buttons -->
+                                            <td class="px-4 py-2 border actions">
+                                                <button class="bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                                    {{ __('Edit') }}
+                                                </button>
+                                                <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
+                                                    {{ __('Delete') }}
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>
