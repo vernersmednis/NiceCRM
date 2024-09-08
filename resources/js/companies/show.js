@@ -3,7 +3,7 @@ $(function() {
     // Get the CSRF token for secure 'DELETE' requests
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
-    // Initialize DataTable for the company details
+    // Initialize current company DataTable for the company details
     $('#companies-table').removeClass('hidden').DataTable({
         pageLength: 1, 
         lengthChange: false, 
@@ -18,7 +18,7 @@ $(function() {
         ]
     });
 
-    // Initialize DataTable with server-side processing
+    // Initialize Employees DataTable with server-side processing
     var originalTableTemplateContent = $('#employees-table');
     var actions = originalTableTemplateContent.find('.actions');
     var urlTemplate = actions.find('a').attr('data-url');
