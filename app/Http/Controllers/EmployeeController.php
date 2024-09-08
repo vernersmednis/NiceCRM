@@ -73,6 +73,15 @@ class EmployeeController extends Controller
         // Redirect to employees list of the company after successful creation
         return redirect()->route('companies.show', ['company' => $validatedData['company_id']]);
     }
+    public function destroy($id)
+    {
+        // Delete the company from the database (if it exists)
+        $employee = Employee::findOrFail($id);
+        $employee->delete();
+
+        // Return a JSON response
+        return response()->json(['success' => 'Employee deleted successfully']);
+    }
     public function create(CreateEmployeeRequest $request)
     {
         $company_id = $request->validated()['company_id'];
