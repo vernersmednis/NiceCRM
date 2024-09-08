@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Mail\CompanyCreatedMail;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyController extends Controller
 {
@@ -87,12 +89,17 @@ class CompanyController extends Controller
         $logoPath = $this->handleLogoUpload($request);
 
         // Create a new company
-        Company::create([
+        $company = Company::create([
             'logo' => $logoPath,
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
         ]);
     
+        
+        Mail::to($company->email)->send(
+            new CompanyCreatedMail($company)
+        );
+
         // Redirect to companies list after successful creation
         return redirect()->route('companies.index');
     }
