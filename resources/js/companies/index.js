@@ -3,7 +3,7 @@ $(function() {
     // Get the CSRF token for secure 'DELETE' requests
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    // Initialize DataTable with server-side processing
+    // Initialize Companies DataTable with server-side processing
     var originalTableTemplateContent = $('#companies-table');
     var actions = originalTableTemplateContent.find('.actions');
     var urlTemplate = actions.find('a').attr('data-url');

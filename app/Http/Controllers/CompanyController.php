@@ -94,7 +94,7 @@ class CompanyController extends Controller
         ]);
     
         // Redirect to companies list after successful creation
-        return redirect('/companies');
+        return redirect()->route('companies.index');
     }
     public function destroy($id)
     {
