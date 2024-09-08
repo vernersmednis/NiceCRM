@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Http\Requests\CreateEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -72,10 +73,10 @@ class EmployeeController extends Controller
         // Redirect to employees list of the company after successful creation
         return redirect()->route('companies.show', ['company' => $validatedData['company_id']]);
     }
-    public function create(Request $request)
+    public function create(CreateEmployeeRequest $request)
     {
-        $company_id = $request->query('company_id');
+        $company_id = $request->validated()['company_id'];
+        // Pass the company_id to the view
         return view('employees.create', compact('company_id'));
     }
-
 }
