@@ -13,9 +13,11 @@
                 <div class="p-6 text-gray-900">
                     <div>
                         <!-- Button to create a new company -->
-                        <button class="bg-green-500 text-white font-bold py-2 px-4 my-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
-                            {{ __('Create New Company') }}
-                        </button>
+                        <a href="{{ route('companies.create') }}">
+                            <button :href="route('companies.index')" class="bg-green-500 text-white font-bold py-2 px-4 my-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
+                                {{ __('Create New Company') }}
+                            </button>
+                        </a>
                         <div class="grid grid-cols-1 gap-0">
                             <!-- Table title -->
                             <div class="col-span-1 border px-8 py-4 text-xl">
@@ -46,11 +48,13 @@
                                             <td class="px-4 py-2 border">
                                                 {{ __('Example email') }}
                                             </td> 
-                                            <!-- "Edit" and "Delete" buttons -->
+                                            <!-- "Details" and "Delete" buttons -->
                                             <td class="px-4 py-2 border actions">
-                                                <button class="edit-btn bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                                                    {{ __('Edit') }}
-                                                </button>
+                                                <a href="#" data-url="{{ route('companies.show', ['company' => ':company']) }}">
+                                                    <button class="edit-btn bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                                        {{ __('Details') }}
+                                                    </button>
+                                                </a>
                                                 <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
                                                     {{ __('Delete') }}
                                                 </button>
