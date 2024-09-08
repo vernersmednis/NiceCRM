@@ -4,7 +4,7 @@ $(function() {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
     // Initialize DataTable for the company details
-    $('#companies-table').DataTable({
+    $('#companies-table').removeClass('hidden').DataTable({
         pageLength: 1, 
         lengthChange: false, 
         searching: false, 
@@ -19,7 +19,9 @@ $(function() {
     });
 
     // Initialize DataTable with server-side processing
-    $('#employees-table').DataTable({
+    var originalTableTemplateContent = $('#employees-table');
+    var actions = originalTableTemplateContent.find('.actions');
+    $('#employees-table').removeClass('hidden').DataTable({
         processing: true, // Show a processing indicator when the table is loading
         serverSide: true, // Enable server-side processing to fetch data from the server
         ajax: {
@@ -38,10 +40,8 @@ $(function() {
                 data: null,
                 render: function (data) {
                     // Render Edit and Delete buttons for each row
-                    return `
-                        <button class="bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">__('Edit')</button>
-                        <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">__('Delete')</button>
-                    `;
+                    actions.find('.delete-btn').attr('data-id', data.id);
+                    return actions.html();
                 }
             }
         ],

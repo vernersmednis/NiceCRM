@@ -26,10 +26,10 @@
                                     <table id="companies-table" class="display" data-storage="{{ asset('storage/') }}" data-ajax="">
                                         <thead>
                                             <tr>
-                                                <th>Logo</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Action</th>
+                                                <th>{{ __('Logo') }}</th>
+                                                <th>{{ __('Name') }}</th>
+                                                <th>{{ __('Email') }}</th>
+                                                <th>{{ __('Action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -40,7 +40,7 @@
                                                         <img id="logoImage" src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo" class="w-10 h-10 object-cover">
                                                         <label id="customLogoInput">
                                                             <input id="logoInput" type="file" name="logo">
-                                                            <span >Choose file</span>
+                                                            <span >{{ __('Choose file') }}</span>
                                                         </label>
                                                     </div>
                                                 </td> 
