@@ -1,0 +1,7 @@
+/* Data table styling */
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before {
+    border-left: 10px solid rgb(255, 0, 0);
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr.dtr-expanded>td.dtr-control:before {
+    border-top: 10px solid rgb(255, 0, 0);
+}
