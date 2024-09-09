@@ -4,7 +4,21 @@ NiceCRM is a portfolio project showcasing basic functionality for managing conte
 
 The original idea for this project was inspired by [Laravel Daily's sample project](https://laraveldaily.com/post/test-junior-laravel-developer-sample-project).
 
-**Additional Features:**
+**Features:**
+Basic Laravel Auth: ability to log in as administrator
+Use database seeds to create first user with email admin@admin.com and password "password"
+CRUD functionality (Create / Read / Update / Delete) for two menu items: Companies and Employees.
+Companies DB table consists of these fields: Name (required), email, logo (minimum 100x100), website
+Employees DB table consists of these fields: First name (required), last name (required), Company (foreign key to Companies), email, phone
+Use database migrations to create those schemas above
+Store companies logos in storage/app/public folder and make them accessible from public
+Use basic Laravel resource controllers with default methods - index, create, store etc.
+Use Laravel's validation function, using Request classes
+Use Laravel's pagination for showing Companies/Employees list, 10 entries per page
+Use Laravel's starter kit for auth and basic theme, but remove ability to register
+
+**Advanced features:**
+- Datables.net implementation with responsive design
 - Email notifications: Sends an email whenever a new company is entered.
 - Multi-language support: Work in progress.
 
@@ -66,9 +80,9 @@ To test email notifications, follow these steps:
      git init
      git remote add origin https://github.com/vernersmednis/NiceCRM.git
      git fetch origin
-     git checkout v1.0 -f
+     git checkout main -f
      git fetch
-     git reset --hard origin/v1.0
+     git reset --hard origin/main
      ```
 
 3. **Set Up the Project Server in Herd:**
