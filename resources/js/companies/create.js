@@ -10,9 +10,8 @@ $(function() {
         language: {
             info: "" // Remove "Showing 1 to 1 of 1 entry" text
         },
-        columnDefs: [
-            { orderable: false, targets: '_all' }, // Disable sorting for all columns
-        ]
+        ordering: false // Disable ordering via column ascending or descending
+
     });
     
     // Functionality to display the selected company logo when "Choose File" is clicked
