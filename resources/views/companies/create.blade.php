@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-span-1 border p-8">
                                 <!-- 'Create company' form -->
-                                <form method="POST" action="/companies" enctype="multipart/form-data">
+                                <form id="companyForm" method="POST" action="/companies" enctype="multipart/form-data">
                                     @csrf
                                     <!-- Table to display the company settings -->                              
                                     <table id="companies-table" class="display" data-storage="{{ asset('storage/') }}">
@@ -38,15 +38,15 @@
                                                     <div class=" flex gap-4">
                                                         <img id="logoImage" src="{{ asset('storage/') }}" alt="Company Logo" class="w-10 h-10 object-cover">
                                                         <label id="customLogoInput">
-                                                            <input id="logoInput" type="file" name="logo">
+                                                            <input id="logoInput" type="file" name="logo" value="{{ old('logo') }}">
                                                             <span >{{ __('Choose file') }}</span>
                                                         </label>
                                                     </div>
                                                 </td> 
                                                 <!-- Company name -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="name" value=""/></td> 
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="name" value="{{ old('name') }}"/></td> 
                                                 <!-- Company email -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="email" value=""/></td>
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="email" value="{{ old('email') }}"/></td>
                                                 <!-- "Save" button -->
                                                 <td class="px-4 py-2 border">
                                                     <button type="submit" class="bg-white border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">{{ __('Create') }}</button>
@@ -70,4 +70,4 @@
     </div>
 </x-app-layout>
 @vite(['resources/css/companies/create.css', 'resources/js/companies/create.js'])
-    
+{!! JsValidator::formRequest('App\Http\Requests\CreateEmployeeRequest', '#companyForm') !!}

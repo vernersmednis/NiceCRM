@@ -18,10 +18,10 @@ class CompanyController extends Controller
         if ($request->hasFile('logo')) {
             $logoPath = $request->file('logo')->store('public/logos');
             return str_replace('public/', '', $logoPath); // Clean up the path if needed
+        } else {
+            // If no new logo is uploaded, return the current logo
+            return $currentLogo;
         }
-
-        // If no new logo is uploaded, return the current logo
-        return $currentLogo;
     }
 
     // This function actually loads companies in batches per datatable.net page

@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-span-1 border p-8">
                                 <!-- 'Create employee' form -->
-                                <form method="POST" action="/employees" enctype="multipart/form-data">
+                                <form id="employeeForm" method="POST" action="/employees" enctype="multipart/form-data">
                                     @csrf
                                     <!-- Table to display the employee settings -->
                                     <input type="hidden" name="company_id" value="{{ $company_id }}"/>                              
@@ -36,13 +36,13 @@
                                         <tbody>
                                             <tr>
                                                 <!-- Employee first name -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="first_name" value=""/></td> 
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="first_name" value="{{ old('first_name') }}"/></td> 
                                                 <!-- Employee last name -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="last_name" value=""/></td> 
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="last_name" value="{{ old('last_name') }}"/></td> 
                                                 <!-- Employee email -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="email" value=""/></td>
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="email" value="{{ old('email') }}"/></td>
                                                 <!-- Employee phone -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="phone" value=""/></td>
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="phone" value="{{ old('phone') }}"/></td>
                                                 <!-- "Save" button -->
                                                 <td class="px-4 py-2 border">
                                                     <button type="submit" class="bg-white border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">{{ __('Save') }}</button>
@@ -67,4 +67,4 @@
     </div>
 </x-app-layout>
 @vite(['resources/css/employees/create.css', 'resources/js/employees/create.js'])
-    
+{!! JsValidator::formRequest('App\Http\Requests\CreateEmployeeRequest', '#employeeForm') !!}
