@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-span-1 border p-8">
                                 <!-- 'Edit company' form -->
-                                <form method="POST" action="/companies/{{$company->id}}" enctype="multipart/form-data">
+                                <form id="companyForm" method="POST" action="/companies/{{$company->id}}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <!-- Table to display the company settings -->
@@ -45,9 +45,9 @@
                                                     </div>
                                                 </td> 
                                                 <!-- Company name -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="name" value="{{ $company->name }}"/></td> 
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="name" value="{{ old('name', $company->name) }}"/></td> 
                                                 <!-- Company email -->
-                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="email" value="{{ $company->email }}"/></td>
+                                                <td class="px-4 py-2 border"><input class="w-full" type="text" name="email" value="{{ old('email', $company->email) }}"/></td>
                                                 <!-- "Save" button -->
                                                 <td class="px-4 py-2 border">
                                                     <button type="submit" class="bg-white border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">{{ __('Save') }}</button>
@@ -71,3 +71,4 @@
     </div>
 </x-app-layout>
 @vite(['resources/css/companies/edit.css', 'resources/js/companies/edit.js'])
+{!! JsValidator::formRequest('App\Http\Requests\CreateEmployeeRequest', '#companyForm') !!}
