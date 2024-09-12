@@ -1,11 +1,9 @@
 $(function() {
     
-    // Get the CSRF token for secure 'DELETE' requests
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
     // Initialize Companies DataTable with server-side processing
     var originalTableTemplateContent = $('#companies-table');
     var actions = originalTableTemplateContent.find('.actions');
+    var formActionUrlTemplate = originalTableTemplateContent.find('form').attr('action');
     var urlTemplate = actions.find('a').attr('data-url');
     $('#companies-table').removeClass('hidden').DataTable({
         processing: true, // Show a processing indicator when the table is loading
@@ -34,6 +32,8 @@ $(function() {
                     var companyUrl = urlTemplate.replace(':company', data.id);
                     actions.find('a').attr('href', companyUrl);
                     actions.find('.delete-btn').attr('data-id', data.id);
+                    var formActionUrl = formActionUrlTemplate.replace(':company', data.id);
+                    actions.find('form').attr('action', formActionUrl);
                     return actions.html();
                 }
             }
@@ -45,26 +45,5 @@ $(function() {
         columnDefs: [
             { orderable: false, targets: '_all' } // Disable sorting on all columns
         ]
-    });
-
-    // Handle Delete button click
-    $(document).on('click', '.delete-btn', function () {
-        const id = $(this).data('id'); // Get the ID of the selected company
-
-        // Send AJAX request to delete the record
-        $.ajax({
-            url: `/companies/${id}`, // URL to delete the specific company
-            type: 'DELETE', // HTTP method for deletion
-            headers: {
-                'X-CSRF-TOKEN': csrfToken, // Send CSRF token for security
-            },
-            success: function () {
-                $('#companies-table').DataTable().ajax.reload(); // Reload the table data after successful deletion
-            },
-            error: function (xhr, status, error) {
-                console.error('Error deleting record:', error);
-                alert('Failed to delete record.');
-            }
-        });
     });
 });

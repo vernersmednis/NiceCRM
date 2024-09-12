@@ -110,7 +110,7 @@ class CompanyController extends Controller
         $company->delete();
 
         // Return a JSON response
-        return response()->json(['success' => 'Company deleted successfully']);
+        return redirect()->route('companies.index')->with('success', 'Company deleted successfully');
     }
 
 

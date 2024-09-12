@@ -1,8 +1,5 @@
 $(function() {
     
-    // Get the CSRF token for secure 'DELETE' requests
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    
     // Initialize current company DataTable for the company details
     $('#companies-table').removeClass('hidden').DataTable({
         pageLength: 1, 
@@ -21,6 +18,7 @@ $(function() {
     // Initialize Employees DataTable with server-side processing
     var originalTableTemplateContent = $('#employees-table');
     var actions = originalTableTemplateContent.find('.actions');
+    var formActionUrlTemplate = originalTableTemplateContent.find('form').attr('action');
     var urlTemplate = actions.find('a').attr('data-url');
     $('#employees-table').removeClass('hidden').DataTable({
         processing: true, // Show a processing indicator when the table is loading
@@ -44,6 +42,8 @@ $(function() {
                     var companyUrl = urlTemplate.replace(':employee', data.id);
                     actions.find('a').attr('href', companyUrl);
                     actions.find('.delete-btn').attr('data-id', data.id);
+                    var formActionUrl = formActionUrlTemplate.replace(':employee', data.id);
+                    actions.find('form').attr('action', formActionUrl);
                     return actions.html();
                 }
             }
@@ -55,26 +55,5 @@ $(function() {
         columnDefs: [
             { orderable: false, targets: '_all' } // Disable sorting on all columns
         ]
-    });
-
-    // Handle Delete button click
-    $(document).on('click', '.delete-btn', function () {
-        const id = $(this).data('id'); // Get the ID of the selected employee
-
-        // Send AJAX request to delete the record
-        $.ajax({
-            url: `/employees/${id}`, // URL to delete the specific employee
-            type: 'DELETE', // HTTP method for deletion
-            headers: {
-                'X-CSRF-TOKEN': csrfToken, // Send CSRF token for security
-            },
-            success: function () {
-                $('#employees-table').DataTable().ajax.reload(); // Reload the table data after successful deletion
-            },
-            error: function (xhr, status, error) {
-                console.error('Error deleting record:', error);
-                alert('Failed to delete record.');
-            }
-        });
     });
 });
