@@ -50,7 +50,7 @@
                                             </td> 
                                             <!-- "Details" and "Delete" buttons -->
                                             <td class="px-4 py-2 border actions">
-                                                <form method="POST" action="{{ route('companies.destroy', ['company' => ':company']) }}" >
+                                                <form class="delete-form" method="POST" action="{{ route('companies.destroy', ['company' => ':company']) }}" >
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="#" data-url="{{ route('companies.show', ['company' => ':company']) }}" 
