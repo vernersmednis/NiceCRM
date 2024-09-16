@@ -10,9 +10,8 @@ $(function() {
         language: {
             info: "" 
         },
-        columnDefs: [
-            { orderable: false, targets: '_all' } 
-        ]
+        ordering: false // Disable ordering via column ascending or descending
+
     });
 
     // Initialize Employees DataTable with server-side processing
@@ -52,8 +51,7 @@ $(function() {
         lengthChange: false, // Disable the ability to change the number of rows displayed
         searching: false, // Disable the search/filtering functionality
         responsive: true, // Enable responsive behavior for better mobile view
-        columnDefs: [
-            { orderable: false, targets: '_all' } // Disable sorting on all columns
-        ]
+        ordering: false // Disable ordering via column ascending or descending
+
     });
 });
