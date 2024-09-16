@@ -1,13 +1,11 @@
 $(function() {
     
-    // Get the CSRF token for secure 'DELETE' requests
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
     // Initialize Companies DataTable with server-side processing
     var originalTableTemplateContent = $('#companies-table');
     var actions = originalTableTemplateContent.find('.actions');
+    var formActionUrlTemplate = originalTableTemplateContent.find('form').attr('action');
     var urlTemplate = actions.find('a').attr('data-url');
-    $('#companies-table').removeClass('hidden').DataTable({
+    var table = $('#companies-table').removeClass('hidden').DataTable({
         processing: true, // Show a processing indicator when the table is loading
         serverSide: true, // Enable server-side processing to fetch data from the server
         ajax: {
@@ -34,6 +32,8 @@ $(function() {
                     var companyUrl = urlTemplate.replace(':company', data.id);
                     actions.find('a').attr('href', companyUrl);
                     actions.find('.delete-btn').attr('data-id', data.id);
+                    var formActionUrl = formActionUrlTemplate.replace(':company', data.id);
+                    actions.find('form').attr('action', formActionUrl);
                     return actions.html();
                 }
             }
@@ -42,29 +42,36 @@ $(function() {
         lengthChange: false, // Disable the ability to change the number of rows displayed
         searching: false, // Disable the search/filtering functionality
         responsive: true, // Enable responsive behavior for better mobile view
-        columnDefs: [
-            { orderable: false, targets: '_all' } // Disable sorting on all columns
-        ]
+        ordering: false // Disable ordering via column ascending or descending
     });
 
-    // Handle Delete button click
-    $(document).on('click', '.delete-btn', function () {
-        const id = $(this).data('id'); // Get the ID of the selected company
+    // Attach the form submission listener when the table is drawn
+    table.on('draw', function () {
 
-        // Send AJAX request to delete the record
-        $.ajax({
-            url: `/companies/${id}`, // URL to delete the specific company
-            type: 'DELETE', // HTTP method for deletion
-            headers: {
-                'X-CSRF-TOKEN': csrfToken, // Send CSRF token for security
-            },
-            success: function () {
-                $('#companies-table').DataTable().ajax.reload(); // Reload the table data after successful deletion
-            },
-            error: function (xhr, status, error) {
-                console.error('Error deleting record:', error);
-                alert('Failed to delete record.');
-            }
+        // Attach submit event listener to all forms with the class 'delete-form'
+        $('.delete-form').on('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            const form = $(this); // Get the current form
+            const url = form.attr('action'); // Get the action URL from the form
+            const method = form.find('input[name="_method"]').val() || 'POST'; // Get the method from the hidden _method input
+            const csrfToken = form.find('input[name="_token"]').val(); // Get the CSRF token from the hidden _token input
+
+            // Confirmation dialog
+            $.ajax({
+                url: url, // URL from the form action
+                type: method, // The method from the form (_method input)
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken // CSRF token from the form
+                },
+                success: function () {
+                    $('#companies-table').DataTable().draw(false);  // Reload the table page data after successful deletion
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error deleting record:', error);
+                    alert('Failed to delete record.');
+                }
+            });
         });
     });
 });

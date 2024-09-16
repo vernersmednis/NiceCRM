@@ -50,14 +50,17 @@
                                             </td> 
                                             <!-- "Details" and "Delete" buttons -->
                                             <td class="px-4 py-2 border actions">
-                                                <a href="#" data-url="{{ route('companies.show', ['company' => ':company']) }}">
-                                                    <button class="edit-btn bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                                <form class="delete-form" method="POST" action="{{ route('companies.destroy', ['company' => ':company']) }}" >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#" data-url="{{ route('companies.show', ['company' => ':company']) }}" 
+                                                       class="edit-btn bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                                                         {{ __('Details') }}
+                                                    </a>
+                                                    <button type="submit" data-id="" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
+                                                        {{ __('Delete') }}
                                                     </button>
-                                                </a>
-                                                <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
-                                                    {{ __('Delete') }}
-                                                </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </tbody>

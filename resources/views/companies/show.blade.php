@@ -97,14 +97,21 @@
                                             </td> 
                                             <!-- "Edit" and "Delete" buttons -->
                                             <td class="px-4 py-2 border actions">
-                                                <a href="#" data-url="{{ route('employees.edit', ['employee' => ':employee']) }}">
-                                                    <button class="bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                                <form class="delete-form" method="POST" action="{{ route('employees.destroy', ['employee' => ':employee']) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="company_id" value="{{ $company->id }}"/>
+                                                    <!-- Edit Button as a Link -->
+                                                    <a href="#" data-url="{{ route('employees.edit', ['employee' => ':employee']) }}" 
+                                                       class="bg-white border border-blue-500 text-blue-500 px-2 py-1 rounded hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                                                         {{ __('Edit') }}
+                                                    </a>
+                                                    <!-- Delete Button as a Form Submit Button -->
+                                                    <button type="submit" 
+                                                            class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
+                                                        {{ __('Delete') }}
                                                     </button>
-                                                </a>
-                                                <button data-id="${data.id}" class="delete-btn bg-orange-500 text-white px-2 py-1 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
-                                                    {{ __('Delete') }}
-                                                </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </tbody>
