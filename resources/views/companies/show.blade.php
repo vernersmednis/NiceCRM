@@ -97,7 +97,7 @@
                                             </td> 
                                             <!-- "Edit" and "Delete" buttons -->
                                             <td class="px-4 py-2 border actions">
-                                                <form method="POST" action="{{ route('employees.destroy', ['employee' => ':employee']) }}" onsubmit="return confirm('Are you sure you want to delete this employee?');">
+                                                <form class="delete-form" method="POST" action="{{ route('employees.destroy', ['employee' => ':employee']) }}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="company_id" value="{{ $company->id }}"/>

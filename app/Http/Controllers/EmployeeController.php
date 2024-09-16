@@ -80,10 +80,8 @@ class EmployeeController extends Controller
     {
         // Use the repository to delete the employee
         $this->employeeRepo->deleteEmployee($id);
-
-        // Redirect after deletion
-        return redirect()->route('companies.show', ['company' => $request['company_id']])
-            ->with('success', 'Employee deleted successfully');
+        
+        return response()->json(['success' => 'Employee deleted successfully']);
     }
 
     public function create(CreateEmployeeRequest $request)
